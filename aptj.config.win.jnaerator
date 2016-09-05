@@ -1,11 +1,11 @@
--library APTJ
-#!-beautifyNames
+-library APT
+#-beautifyNames
 -f
 -o src/
 -rootPackage src
 -package aptj.bindings
 -arch win64 
--libFile lib/apt/APT.lib lib/apt/APT.dll  
+-libFile lib/apt/APT.lib 
 -runtime BridJ
 -mode Directory
 lib/apt/APTAPI.fixed.h

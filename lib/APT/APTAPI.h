@@ -69,7 +69,7 @@ long WINAPI APTInit(void);
 long WINAPI APTCleanUp(void);
 long WINAPI GetNumHWUnitsEx(long lHWType, long *plNumUnits);
 long WINAPI GetHWSerialNumEx(long lHWType, long lIndex, long *plSerialNum);
-long WINAPI GetHWInfo(long lSerialNum, TCHAR *szModel, long lModelLen, TCHAR *szSWVer, long lSWVerLen, TCHAR *szHWNotes, long lHWNotesLen);
+long WINAPI GetHWInfo(long lSerialNum, wchar_t *szModel, long lModelLen, wchar_t *szSWVer, long lSWVerLen, wchar_t *szHWNotes, long lHWNotesLen);
 long WINAPI InitHWDevice(long lSerialNum);
 long WINAPI EnableEventDlg(BOOL bEnable);
 

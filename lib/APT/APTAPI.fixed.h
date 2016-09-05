@@ -69,7 +69,7 @@ long __stdcall APTInit(void);
 long __stdcall APTCleanUp(void);
 long __stdcall GetNumHWUnitsEx(long lHWType, long *plNumUnits);
 long __stdcall GetHWSerialNumEx(long lHWType, long lIndex, long *plSerialNum);
-long __stdcall GetHWInfo(long lSerialNum, TCHAR *szModel, long lModelLen, TCHAR *szSWVer, long lSWVerLen, TCHAR *szHWNotes, long lHWNotesLen);
+long __stdcall GetHWInfo(long lSerialNum, wchar_t *szModel, long lModelLen, wchar_t *szSWVer, long lSWVerLen, wchar_t *szHWNotes, long lHWNotesLen);
 long __stdcall InitHWDevice(long lSerialNum);
 long __stdcall EnableEventDlg(BOOL bEnable);
 
