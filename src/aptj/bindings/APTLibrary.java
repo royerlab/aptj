@@ -13,78 +13,78 @@ import org.bridj.ann.Runtime;
  * a tool written by <a href="http://ochafik.com/">Olivier Chafik</a> that <a href="http://code.google.com/p/jnaerator/wiki/CreditsAndLicense">uses a few opensource projects.</a>.<br>
  * For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> or <a href="http://bridj.googlecode.com/">BridJ</a> .
  */
-@Library("APT") 
+@Library(value = "APT", dependencies = {"ftd2xx.dll", "MG17Utils.dll", "MG17Comms.dll", "MG17UIThread.dll", "MG17Core.dll"}) 
 @Runtime(CRuntime.class) 
 public class APTLibrary {
 	static {
 		BridJ.register();
 	}
 	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWLIMSWITCH_BREAKS_HOMEONLY = (int)5;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWLIMSWITCH_MAKES_HOMEONLY = (int)4;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HOMELIMSW_FWD = (int)4;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_BDC101 = (int)14;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HOME_FWD = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWLIMSWITCH_IGNORE = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int MOVE_REV = (int)2;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HOME_REV = (int)2;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_OST001 = (int)25;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_LTSXXX = (int)42;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int MOVE_FWD = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWLIMSWITCH_BREAKS = (int)3;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_TDC001 = (int)31;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int DC_JS_DIRSENSE_NEG = (int)2;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int STAGE_UNITS_MM = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int DC_PROFILEMODE_TRAPEZOIDAL = (int)0;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
 	public static final int HWTYPE_BSC001 = (int)11;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_BSC002 = (int)13;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HOMELIMSW_REV = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int STAGE_UNITS_DEG = (int)2;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int CHAN1_INDEX = (int)0;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_TST001 = (int)29;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_MST601 = (int)26;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_SCC001 = (int)21;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_L490MZ = (int)43;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWLIMSWITCH_MAKES = (int)2;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_ODC001 = (int)24;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int CHAN2_INDEX = (int)1;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int HWTYPE_DCC001 = (int)22;
-	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int DC_PROFILEMODE_SCURVE = (int)2;
 	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
 	public static final int HWTYPE_BSC101 = (int)12;
 	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
-	public static final int DC_JS_DIRSENSE_POS = (int)1;
+	public static final int HWTYPE_BSC002 = (int)13;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_BDC101 = (int)14;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_SCC001 = (int)21;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_DCC001 = (int)22;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_ODC001 = (int)24;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_OST001 = (int)25;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_MST601 = (int)26;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_TST001 = (int)29;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_TDC001 = (int)31;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_LTSXXX = (int)42;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWTYPE_L490MZ = (int)43;
 	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
 	public static final int HWTYPE_BBD10X = (int)44;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int CHAN1_INDEX = (int)0;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int CHAN2_INDEX = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HOME_FWD = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HOME_REV = (int)2;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HOMELIMSW_FWD = (int)4;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HOMELIMSW_REV = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int STAGE_UNITS_MM = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int STAGE_UNITS_DEG = (int)2;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWLIMSWITCH_IGNORE = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWLIMSWITCH_MAKES = (int)2;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWLIMSWITCH_BREAKS = (int)3;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWLIMSWITCH_MAKES_HOMEONLY = (int)4;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int HWLIMSWITCH_BREAKS_HOMEONLY = (int)5;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int MOVE_FWD = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int MOVE_REV = (int)2;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int DC_PROFILEMODE_TRAPEZOIDAL = (int)0;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int DC_PROFILEMODE_SCURVE = (int)2;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int DC_JS_DIRSENSE_POS = (int)1;
+	/** <i>native declaration : lib\APT\APTAPI.fixed.h</i> */
+	public static final int DC_JS_DIRSENSE_NEG = (int)2;
 	/**
 	 * System Level Exports.<br>
 	 * Original signature : <code>long APTInit()</code><br>
@@ -144,8 +144,7 @@ public class APTLibrary {
 	@org.bridj.ann.CLong 
 	public static native long InitHWDevice(@org.bridj.ann.CLong long lSerialNum);
 	/**
-	 * 0 -> false, 1-< true<br>
-	 * Original signature : <code>long EnableEventDlg(int)</code><br>
+	 * Original signature : <code>long EnableEventDlg(BOOL)</code><br>
 	 * <i>native declaration : lib\APT\APTAPI.fixed.h:74</i>
 	 */
 	@Convention(Convention.Style.StdCall) 
