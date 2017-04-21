@@ -33,7 +33,7 @@ public class APTJTests
 
 			System.out.println(lNumberOfDevices);
 
-			APTJDevice lDevice = lAPTJLibrary.createDevice(0);
+			APTJDevice lDevice = lAPTJLibrary.createDeviceFromIndex(0);
 
 			System.out.println("home()");
 			lDevice.home();
@@ -59,7 +59,7 @@ public class APTJTests
 			System.out.println("move(1)");
 			lDevice.move(1);
 			Thread.sleep(20000);
-			assertTrue(lDevice.getCurrentPosition() > lDevice.getHighPosition() / 2);
+			assertTrue(lDevice.getCurrentPosition() > lDevice.getMaxPosition() / 2);
 
 			System.out.println("moveTo(1)");
 			lDevice.moveTo(1);

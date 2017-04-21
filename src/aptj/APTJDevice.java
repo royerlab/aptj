@@ -17,23 +17,28 @@ import aptj.bindings.APTLibrary;
  */
 public class APTJDevice
 {
+  private final APTJDeviceFactory mAPTJDeviceFactory;
 	private final APTJDeviceType mAPTJDeviceType;
 	private final long mDeviceSerialNum;
 	private final String mModelString, mSWVerString, mNotesString;
-	private final float mLowPosition, mHighPosition, mPitch;
+	private final float mMinPosition, mMaxPosition, mPitch;
 	private final APTJUnits mUnits;
 	private final float mMaxAccel, mMaxVelocity;
 
+
 	/**
 	 * Instantiates an APTJ device
+	 * @param pAPTJDeviceFactory parent factory
 	 * @param pAPTJDeviceType APTJ device type
 	 * @param pDeviceSerialNum device serial number
 	 * @throws APTJExeption exception
 	 */
-	public APTJDevice(APTJDeviceType pAPTJDeviceType,
+	public APTJDevice(APTJDeviceFactory pAPTJDeviceFactory,
+	                  APTJDeviceType pAPTJDeviceType,
 										long pDeviceSerialNum) throws APTJExeption
 	{
-		mAPTJDeviceType = pAPTJDeviceType;
+		mAPTJDeviceFactory = pAPTJDeviceFactory;
+    mAPTJDeviceType = pAPTJDeviceType;
 		mDeviceSerialNum = pDeviceSerialNum;
 
 		APTJDeviceFactory.checkError(APTLibrary.InitHWDevice(getSerialNumber()));
@@ -73,8 +78,8 @@ public class APTJDevice
 																															lUnitPointer,
 																															lPitchPointer));/**/
 
-			mLowPosition = lMinPosPointer.get();
-			mHighPosition = lMaxPosPointer.get();
+			mMinPosition = lMinPosPointer.get();
+			mMaxPosition = lMaxPosPointer.get();
 			mPitch = lPitchPointer.get();
 			mUnits = (((lUnitPointer.get().intValue()) == 1) ? APTJUnits.mm
 																											: APTJUnits.deg);
@@ -101,6 +106,15 @@ public class APTJDevice
 		}
 
 	}
+	
+  /**
+   * Returns the parent factory
+   * @return parent factory
+   */
+  public APTJDeviceFactory getAPTJDeviceFactory()
+  {
+    return mAPTJDeviceFactory;
+  }
 
 	/**
 	 * Home device
@@ -440,18 +454,18 @@ public class APTJDevice
 	 * Returns lower limit position 
 	 * @return lower limit position 
 	 */
-	public float getLowPosition()
+	public float getMinPosition()
 	{
-		return mLowPosition;
+		return mMinPosition;
 	}
 
 	/**
 	 * Returns higher limit position 
 	 * @return higher limit position 
 	 */
-	public float getHighPosition()
+	public float getMaxPosition()
 	{
-		return mHighPosition;
+		return mMaxPosition;
 	}
 
 	/**
@@ -499,12 +513,14 @@ public class APTJDevice
 													mModelString,
 													mSWVerString,
 													mNotesString,
-													mLowPosition,
-													mHighPosition,
+													mMinPosition,
+													mMaxPosition,
 													mPitch,
 													mUnits,
 													mMaxAccel,
 													mMaxVelocity);
 	}
+
+
 
 }
