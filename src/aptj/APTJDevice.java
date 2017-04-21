@@ -10,6 +10,11 @@ import org.bridj.Pointer;
 
 import aptj.bindings.APTLibrary;
 
+/**
+ * APTJ device
+ *
+ * @author royer
+ */
 public class APTJDevice
 {
 	private final APTJDeviceType mAPTJDeviceType;
@@ -19,21 +24,27 @@ public class APTJDevice
 	private final APTJUnits mUnits;
 	private final float mMaxAccel, mMaxVelocity;
 
+	/**
+	 * Instantiates an APTJ device
+	 * @param pAPTJDeviceType APTJ device type
+	 * @param pDeviceSerialNum device serial number
+	 * @throws APTJExeption exception
+	 */
 	public APTJDevice(APTJDeviceType pAPTJDeviceType,
 										long pDeviceSerialNum) throws APTJExeption
 	{
 		mAPTJDeviceType = pAPTJDeviceType;
 		mDeviceSerialNum = pDeviceSerialNum;
 
-		APTJLibrary.checkError(APTLibrary.InitHWDevice(getSerialNumber()));
-		APTJLibrary.checkError(APTLibrary.MOT_Identify(getSerialNumber()));/**/
+		APTJDeviceFactory.checkError(APTLibrary.InitHWDevice(getSerialNumber()));
+		APTJDeviceFactory.checkError(APTLibrary.MOT_Identify(getSerialNumber()));/**/
 
 		{
 			Pointer<Character> lPointerModelString = Pointer.allocateChars(1024);
 			Pointer<Character> lPointerSWVerString = Pointer.allocateChars(1024);
 			Pointer<Character> lPointerNotesString = Pointer.allocateChars(1024);
 
-			APTJLibrary.checkError(APTLibrary.GetHWInfo(getSerialNumber(),
+			APTJDeviceFactory.checkError(APTLibrary.GetHWInfo(getSerialNumber(),
 																									lPointerModelString,
 																									1024,
 																									lPointerSWVerString,
@@ -56,7 +67,7 @@ public class APTJDevice
 			Pointer<CLong> lUnitPointer = Pointer.allocateCLong();
 			Pointer<Float> lPitchPointer = Pointer.allocateFloat();
 
-			APTJLibrary.checkError(APTLibrary.MOT_GetStageAxisInfo(	getSerialNumber(),
+			APTJDeviceFactory.checkError(APTLibrary.MOT_GetStageAxisInfo(	getSerialNumber(),
 																															lMinPosPointer,
 																															lMaxPosPointer,
 																															lUnitPointer,
@@ -78,7 +89,7 @@ public class APTJDevice
 			Pointer<Float> lMaxAccnLimitPointer = Pointer.allocateFloat();
 			Pointer<Float> lMaxVelLimitPointer = Pointer.allocateFloat();
 
-			APTJLibrary.checkError(APTLibrary.MOT_GetVelParamLimits(getSerialNumber(),
+			APTJDeviceFactory.checkError(APTLibrary.MOT_GetVelParamLimits(getSerialNumber(),
 																															lMaxAccnLimitPointer,
 																															lMaxVelLimitPointer));/**/
 
@@ -91,51 +102,80 @@ public class APTJDevice
 
 	}
 
+	/**
+	 * Home device
+	 * @throws APTJExeption exception
+	 */
 	public void home() throws APTJExeption
 	{
 		stopIfNeeded();
-		APTJLibrary.checkError(APTLibrary.MOT_MoveHome(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_MoveHome(	getSerialNumber(),
 																										0));
 	}
 
+	/**
+	 * Stop device
+	 * @throws APTJExeption exception
+	 */
 	public void stop() throws APTJExeption
 	{
-		APTJLibrary.checkError(APTLibrary.MOT_StopProfiled(getSerialNumber()));
+		APTJDeviceFactory.checkError(APTLibrary.MOT_StopProfiled(getSerialNumber()));
 	}
 
+	/**
+	 * Move with given velocity
+	 * @param pVelocity velocity
+	 * @throws APTJExeption exception
+	 */
 	public void move(double pVelocity) throws APTJExeption
 	{
 		move(pVelocity, getAcceleration());
 	}
 
+	/**
+	 * Move with given velocity and acceleration
+	 * @param pVelocity velocity
+	 * @param pAcceleration acceleration
+	 * @throws APTJExeption exception
+	 */
 	public void move(double pVelocity, double pAcceleration) throws APTJExeption
 	{
-		APTJLibrary.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
 																												0,
 																												(float) getAcceleration(),
 																												(float) abs(pVelocity)));
 
 		int lDirection = signum(pVelocity) > 0 ? 1 : 2;
 
-		APTJLibrary.checkError(APTLibrary.MOT_MoveVelocity(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_MoveVelocity(	getSerialNumber(),
 																												lDirection));/**/
 	}
 
+	/**
+	 * Sets speed
+	 * @param pSpeed speed
+	 * @throws APTJExeption exception
+	 */
 	public void setSpeed(double pSpeed) throws APTJExeption
 	{
-		APTJLibrary.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
 																												0,
 																												(float) getAcceleration(),
 																												(float) pSpeed));
 	}
 
+	/**
+	 * Returns the current speed
+	 * @return speed
+	 * @throws APTJExeption exception
+	 */
 	public double getSpeed() throws APTJExeption
 	{
 		Pointer<Float> lMinVelPointer = Pointer.allocateFloat();
 		Pointer<Float> lAccnPointer = Pointer.allocateFloat();
 		Pointer<Float> lMaxVelPointer = Pointer.allocateFloat();
 
-		APTJLibrary.checkError(APTLibrary.MOT_GetVelParams(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_GetVelParams(	getSerialNumber(),
 																												lMinVelPointer,
 																												lAccnPointer,
 																												lMaxVelPointer));/**/
@@ -149,21 +189,31 @@ public class APTJDevice
 		return lSpeed;
 	}
 
+	/**
+	 * Sets the current acceleration
+	 * @param pAcceleration acceleration
+	 * @throws APTJExeption exception
+	 */
 	public void setAcceleration(double pAcceleration) throws APTJExeption
 	{
-		APTJLibrary.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_SetVelParams(	getSerialNumber(),
 																												0,
 																												(float) pAcceleration,
 																												(float) getSpeed()));
 	}
 
+	/**
+	 * Returns current acceleration
+	 * @return current acceleration
+	 * @throws APTJExeption exception
+	 */
 	public double getAcceleration() throws APTJExeption
 	{
 		Pointer<Float> lMinVelPointer = Pointer.allocateFloat();
 		Pointer<Float> lAccnPointer = Pointer.allocateFloat();
 		Pointer<Float> lMaxVelPointer = Pointer.allocateFloat();
 
-		APTJLibrary.checkError(APTLibrary.MOT_GetVelParams(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_GetVelParams(	getSerialNumber(),
 																												lMinVelPointer,
 																												lAccnPointer,
 																												lMaxVelPointer));/**/
@@ -177,27 +227,43 @@ public class APTJDevice
 		return lAcceleration;
 	}
 
+	/**
+	 * Move to new position
+	 * @param pNewPosition new position
+	 * @throws APTJExeption exception
+	 */
 	public void moveTo(double pNewPosition) throws APTJExeption
 	{
 		stopIfNeeded();
-		APTJLibrary.checkError(APTLibrary.MOT_MoveAbsoluteEx(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_MoveAbsoluteEx(	getSerialNumber(),
 																													(float) pNewPosition,
 																													0));
 	}
 
+	/**
+	 * Move by a delta to a new position
+	 * @param pDeltaPosition delta position
+	 * @throws APTJExeption exception
+	 */
 	public void moveBy(double pDeltaPosition) throws APTJExeption
 	{
 		stopIfNeeded();
-		APTJLibrary.checkError(APTLibrary.MOT_MoveRelativeEx(	getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_MoveRelativeEx(	getSerialNumber(),
 																													(float) pDeltaPosition,
 																													0));
 	}
 
+	
+	/**
+	 * Returns the current position
+	 * @return current position
+	 * @throws APTJExeption exception
+	 */
 	public double getCurrentPosition() throws APTJExeption
 	{
 		Pointer<Float> lPositionPointer = Pointer.allocateFloat();
 
-		APTJLibrary.checkError(APTLibrary.MOT_GetPosition(getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_GetPosition(getSerialNumber(),
 																											lPositionPointer));
 		double lCurrentPosition = lPositionPointer.get();
 
@@ -206,6 +272,14 @@ public class APTJDevice
 		return lCurrentPosition;
 	}
 
+	/**
+	 * Waits until current movement finishes 
+	 * @param pPollPeriod poll period
+	 * @param pTimeOut time out
+	 * @param pTimeUnit time unit
+	 * @return true ->  no timeout, false -> timeout
+	 * @throws APTJExeption exception
+	 */
 	public boolean waitWhileMoving(	long pPollPeriod,
 																	long pTimeOut,
 																	TimeUnit pTimeUnit) throws APTJExeption
@@ -234,6 +308,11 @@ public class APTJDevice
 			stop();
 	}
 
+	/**
+	 * Returns true if the limit has been attained
+	 * @return  true -> limit reached
+	 * @throws APTJExeption exception
+	 */
 	public boolean isLimitAttained() throws APTJExeption
 	{
 
@@ -251,6 +330,11 @@ public class APTJDevice
 		return lIsLimitAttained;
 	}
 
+	/**
+	 * Returns true if the device is moving
+	 * @return true
+	 * @throws APTJExeption exception
+	 */
 	public boolean isMoving() throws APTJExeption
 	{
 
@@ -286,7 +370,7 @@ public class APTJDevice
 	{
 		Pointer<CLong> lStatusBitsPointer = Pointer.allocateCLong();
 
-		APTJLibrary.checkError(APTLibrary.MOT_GetStatusBits(getSerialNumber(),
+		APTJDeviceFactory.checkError(APTLibrary.MOT_GetStatusBits(getSerialNumber(),
 																												lStatusBitsPointer));
 
 		/*System.out.println("status bits: " + toBinaryString(lStatusBitsPointer.get()
@@ -299,62 +383,108 @@ public class APTJDevice
 		return lStatusBits;
 	}
 
-	private static String toBinaryString(long pLongValue)
+	@SuppressWarnings("unused")
+  private static String toBinaryString(long pLongValue)
 	{
 		return new StringBuilder(Long.toBinaryString(pLongValue)).reverse()
 																															.toString();
 	}
 
+	/**
+	 * Returns the device type
+	 * @return device type
+	 */
 	public APTJDeviceType getDeviceType()
 	{
 		return mAPTJDeviceType;
 	}
 
+	/**
+	 * Returns the device serial number
+	 * @return device serial number
+	 */
 	public long getSerialNumber()
 	{
 		return mDeviceSerialNum;
 	}
 
+	/**
+	 * Returns the model string
+	 * @return model string
+	 */
 	public String getModelString()
 	{
 		return mModelString;
 	}
 
+	/**
+	 * Returns the software version string
+	 * @return software version string
+	 */
 	public String getSoftwareVersionString()
 	{
 		return mSWVerString;
 	}
 
+	
+	/**
+	 * Returns the notes string
+	 * @return notes string
+	 */
 	public String getNotesString()
 	{
 		return mNotesString;
 	}
 
+	/**
+	 * Returns lower limit position 
+	 * @return lower limit position 
+	 */
 	public float getLowPosition()
 	{
 		return mLowPosition;
 	}
 
+	/**
+	 * Returns higher limit position 
+	 * @return higher limit position 
+	 */
 	public float getHighPosition()
 	{
 		return mHighPosition;
 	}
 
+	/**
+	 * Returns units
+	 * @return units
+	 */
 	public APTJUnits getUnits()
 	{
 		return mUnits;
 	}
 
+	/**
+	 * Returns device's pitch
+	 * @return pitch
+	 */
 	public float getPitch()
 	{
 		return mPitch;
 	}
 
+	/**
+	 * Returns max acceleration
+	 * @return  max acceleration
+	 */
 	public float getMaxAcceleration()
 	{
 		return mMaxAccel;
 	}
 
+	/**
+	 * Returns max velocity
+	 * @return max velocity
+	 */
 	public float getMaxVelocity()
 	{
 		return mMaxVelocity;

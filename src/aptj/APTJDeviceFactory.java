@@ -7,12 +7,22 @@ import org.bridj.Pointer;
 
 import aptj.bindings.APTLibrary;
 
-public class APTJLibrary implements AutoCloseable
+/**
+ * APTJ Device factory
+ *
+ * @author royer
+ */
+public class APTJDeviceFactory implements AutoCloseable
 {
 	private APTJDeviceType mAPTDeviceType;
 	private BidiMap<Integer, Long> mIndexToSerialBidiMap = new DualHashBidiMap<>();
 
-	public APTJLibrary(APTJDeviceType pAPTDeviceType) throws APTJExeption
+	/**
+	 * Instantiates an APTJ Library object given a device type
+	 * @param pAPTDeviceType device type
+	 * @throws APTJExeption exception
+	 */
+	public APTJDeviceFactory(APTJDeviceType pAPTDeviceType) throws APTJExeption
 	{
 		super();
 		mAPTDeviceType = pAPTDeviceType;
@@ -45,6 +55,12 @@ public class APTJLibrary implements AutoCloseable
 		}
 	}
 
+	/**
+	 * Creates a device of given index
+	 * @param pDeviceIndex device index
+	 * @return APTJ device
+	 * @throws APTJExeption exception
+	 */
 	public final APTJDevice createDevice(int pDeviceIndex) throws APTJExeption
 	{
 		return new APTJDevice(mAPTDeviceType,
@@ -61,6 +77,10 @@ public class APTJLibrary implements AutoCloseable
 		return pReturnCode;
 	}
 
+	/**
+	 * Returns the number of devices for the device type associated to this library instance
+	 * @return number of devices
+	 */
 	public final int getNumberOfDevices()
 	{
 		Pointer<CLong> lPointerNumDevices = Pointer.allocateCLong();

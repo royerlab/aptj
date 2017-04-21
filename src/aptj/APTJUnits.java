@@ -1,6 +1,19 @@
 package aptj;
 
+/**
+ * APTJ units
+ *
+ * @author royer
+ */
 public enum APTJUnits
 {
-	mm, deg;
+ /**
+  * Millimeters
+  */
+ mm,
+ 
+ /**
+  * Degrees
+  */
+ deg;
 }

@@ -10,9 +10,18 @@ import org.junit.Test;
 
 import aptj.bindings.APTLibrary;
 
+/**
+ * APTJ Library tests
+ *
+ * @author royer
+ */
 public class APTLibraryTests
 {
 
+	/**
+	 * Test
+	 * @throws InterruptedException NA
+	 */
 	@Test
 	public void test() throws InterruptedException
 	{

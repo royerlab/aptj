@@ -9,15 +9,24 @@ import org.junit.Test;
 
 import aptj.APTJDevice;
 import aptj.APTJDeviceType;
-import aptj.APTJLibrary;
+import aptj.APTJDeviceFactory;
 
-public class APTJLibraryTests
+/**
+ * APTJ Tests
+ *
+ * @author royer
+ */
+public class APTJTests
 {
 
+	/**
+	 * Tests TST001 device
+	 * @throws Exception NA
+	 */
 	@Test
 	public void testTST001Device() throws Exception
 	{
-		try (APTJLibrary lAPTJLibrary = new APTJLibrary(APTJDeviceType.TST001))
+		try (APTJDeviceFactory lAPTJLibrary = new APTJDeviceFactory(APTJDeviceType.TST001))
 		{
 
 			int lNumberOfDevices = lAPTJLibrary.getNumberOfDevices();
