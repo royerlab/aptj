@@ -1,4 +1,4 @@
-package aptj.test;
+package aptj.demo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,7 +16,7 @@ import aptj.APTJDeviceType;
  *
  * @author royer
  */
-public class APTJTests
+public class APTJDemo
 {
 
   /**

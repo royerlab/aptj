@@ -1,4 +1,4 @@
-package aptj.bindings.test;
+package aptj.bindings.demo;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,7 @@ import aptj.bindings.APTLibrary;
  *
  * @author royer
  */
-public class APTLibraryTests
+public class APTLibraryDemo
 {
 
 	/**
