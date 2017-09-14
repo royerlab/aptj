@@ -113,8 +113,7 @@ def getVersionName = {
 }
 
 group = 'net.rtlib'
-version = '0.0.1'
-//getVersionName()
+version = getVersionName()
 
 artifacts
 {
