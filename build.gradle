@@ -112,7 +112,7 @@ def getVersionName = {
     return stdout.toString().trim()
 }
 
-group = 'net.rtlib'
+group = 'net.clearcontrol'
 version = getVersionName()
 
 artifacts
@@ -147,9 +147,9 @@ if(hasProperty('bintray_user') && hasProperty('bintray_key') )
 			userOrg = 'clearcontrol' //An optional organization name when the repo belongs to one of the user's orgs
 			name = project.name
 			desc = project.name
-			websiteUrl = 'https://github.com/ClearControl/ASDKJ'
-			issueTrackerUrl = 'https://github.com/ClearControl/ASDKJ/issues'
-			vcsUrl = 'https://github.com/ClearControl/ASDKJ.git'
+			websiteUrl = 'https://github.com/ClearControl/APTJ'
+			issueTrackerUrl = 'https://github.com/ClearControl/APTJ/issues'
+			vcsUrl = 'https://github.com/ClearControl/APTJ.git'
 			licenses = ['GPL-3.0']
 			labels = [
 				'ClearControl',
@@ -183,12 +183,3 @@ if(hasProperty('bintray_user') && hasProperty('bintray_key') )
 	}
 	/**/
 }
-
-
-
-
-
-
-
-
-
