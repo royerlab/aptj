@@ -69,7 +69,7 @@ long WINAPI APTInit(void);
 long WINAPI APTCleanUp(void);
 long WINAPI GetNumHWUnitsEx(long lHWType, long *plNumUnits);
 long WINAPI GetHWSerialNumEx(long lHWType, long lIndex, long *plSerialNum);
-long WINAPI GetHWInfo(long lSerialNum, wchar_t *szModel, long lModelLen, wchar_t *szSWVer, long lSWVerLen, wchar_t *szHWNotes, long lHWNotesLen);
+long WINAPI GetHWInfo(long lSerialNum, TCHAR *szModel, long lModelLen, TCHAR *szSWVer, long lSWVerLen, TCHAR *szHWNotes, long lHWNotesLen);
 long WINAPI InitHWDevice(long lSerialNum);
 long WINAPI EnableEventDlg(BOOL bEnable);
 
@@ -87,6 +87,8 @@ long WINAPI MOT_GetVelParams(long lSerialNum, float *pfMinVel, float *pfAccn, fl
 long WINAPI MOT_GetVelParamLimits(long lSerialNum, float *pfMaxAccn, float *pfMaxVel);
 long WINAPI MOT_SetHomeParams(long lSerialNum, long lDirection, long lLimSwitch, float fHomeVel, float fZeroOffset);
 long WINAPI MOT_GetHomeParams(long lSerialNum, long *plDirection, long *plLimSwitch, float *pfHomeVel, float *pfZeroOffset);
+long WINAPI MOT_SetJogParams(long lSerialNum, long lMode, long lStopMode, float fStepSize, float fMinVel, float fAccn, float fMaxVel);
+long WINAPI MOT_GetJogParams(long lSerialNum, long *plMode, long *plStopMode, float *pfStepSize, float *pfMinVel, float *pfAccn, float *pfMaxVel);
 long WINAPI MOT_GetStatusBits(long lSerialNum, long *plStatusBits);
 
 long WINAPI MOT_SetBLashDist(long lSerialNum, float fBLashDist);
@@ -105,6 +107,7 @@ long WINAPI MOT_MoveHome(long lSerialNum, BOOL bWait);
 long WINAPI MOT_MoveRelativeEx(long lSerialNum, float fRelDist, BOOL bWait);
 long WINAPI MOT_MoveAbsoluteEx(long lSerialNum, float fAbsPos, BOOL bWait);
 long WINAPI MOT_MoveVelocity(long lSerialNum, long lDirection);
+long WINAPI MOT_MoveJog(long lSerialNum, long lDirection, BOOL bWait);
 long WINAPI MOT_StopProfiled(long lSerialNum);
 
 // Brushless DC Servo Specific Exports.
